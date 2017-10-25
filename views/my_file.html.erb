@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="application.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//www.google.com/jsapi"></script>
+	<script src="chartkick.js"></script>
+</head>
+<body>
+	<%= binding.pry%>
+	<%= bar_chart   @arr.map { |c| { name: c[:name], data: c[:data]  }}, discrete: true %>
+		<table>
+			<thead>
+				<tr>
+					<th width="100">Method Type</th>
+					<th width="100">Called for URL</th>
+					<th width="150">IP Address</th>
+					<th width="100">Date</th>
+					<th width="50">No. of times visited</th>
+					<th widht="40">Country</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% hits.each do |key, value| %>
+				<tr>
+					<td><%= key[0] %></td>
+					<td><%= key[1] %></td>
+					<td><%= key[3] %></td>
+					<td><%= key[5] %></td>
+					<td><%= value %></td>
+					<td class="geo-results">
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<script>
+			var hits = <%= @hits %>
+			$(document).ready(function() {
+				var tds = $('.geo-results')
+				hits.forEach(function(hit, index) {
+					$.getJSON("http://ip-api.com/json/"+hit[0][3], function(data){
+						var table_body = "";
+						$.each(data, function(k, v) {
+							if(k == "country" ){
+								table_body +=   data['city']+','+data['country'];
+							}
+						});
+						$(tds[index]).html(table_body);
+					});
+				})
+			});
+		</script>
+		<%= will_paginate @hits, renderer: BootstrapPagination::Sinatra %>
+	</body>
+	</html>
+	
