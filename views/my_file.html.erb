@@ -4,55 +4,125 @@
 	<script src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="application.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/stylesheets/style.css">
 	<script src="//www.google.com/jsapi"></script>
 	<script src="chartkick.js"></script>
 </head>
 <body>
-	<%= binding.pry%>
-	<%= bar_chart   @arr.map { |c| { name: c[:name], data: c[:data]  }}, discrete: true %>
-		<table>
-			<thead>
-				<tr>
-					<th width="100">Method Type</th>
-					<th width="100">Called for URL</th>
-					<th width="150">IP Address</th>
-					<th width="100">Date</th>
-					<th width="50">No. of times visited</th>
-					<th widht="40">Country</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% hits.each do |key, value| %>
-				<tr>
-					<td><%= key[0] %></td>
-					<td><%= key[1] %></td>
-					<td><%= key[3] %></td>
-					<td><%= key[5] %></td>
-					<td><%= value %></td>
-					<td class="geo-results">
-					</td>
-				</tr>
-				<% end %>
-			</tbody>
-		</table>
-		<script>
-			var hits = <%= @hits %>
-			$(document).ready(function() {
-				var tds = $('.geo-results')
-				hits.forEach(function(hit, index) {
-					$.getJSON("http://ip-api.com/json/"+hit[0][3], function(data){
-						var table_body = "";
-						$.each(data, function(k, v) {
-							if(k == "country" ){
-								table_body +=   data['city']+','+data['country'];
-							}
-						});
-						$(tds[index]).html(table_body);
+	<div class="allpage-scroll">
+		<div class="container">
+	    <div class="header">
+	      <div class="logo-section">
+	        <a href="/announcements">
+	          <img class="logo" src="/images/newlogo3.png" alt="/">
+	        </a>
+	      </div>
+	      <div class="profile-section">
+	        <ul>
+	          <li>
+	            <span class="profile-pic">
+	              <img src="/images/piri.png" alt="">
+	            </span>
+	          </li>
+	          <div class="clearfix"></div>
+	        </ul>
+	      </div>
+	      <div class="clearfix"></div>
+	    </div>
+	    <div>
+	    	<div class="panel-group">
+    			<div class="panel panel-default">
+	          <div class="panel-heading">
+	            <h4 class="panel-title d-iblock">
+	              Stats
+	            </h4>
+	          </div>
+	          <div>
+	          	<div class="panel-body">
+								<%= bar_chart   @arr.map { |c| { name: c[:name], data: c[:data]  }}, discrete: true %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+    		<div class="panel-group">
+    			<div class="panel panel-default">
+	          <div class="panel-heading">
+	            <h4 class="panel-title d-iblock">
+	              Detailed view
+	            </h4>
+	          </div>
+	          <div>
+	            <div class="panel-body">
+								<table class="single-row table-style table-bordered">
+									<thead>
+										<tr>
+											<th width="100">Method Type</th>
+											<th width="300">Called for URL</th>
+											<th width="150">IP Address</th>
+											<th width="100">Date</th>
+											<th width="100">No. of times visited</th>
+											<th widht="40">Country</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% hits.each do |key, value| %>
+										<tr>
+											<td><%= key[0] %></td>
+											<td><%= key[1] %></td>
+											<td><%= key[3] %></td>
+											<td><%= key[5] %></td>
+											<td><%= value %></td>
+											<td class="geo-results">
+											</td>
+										</tr>
+										<% end %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="text-align: center;">
+				<%= will_paginate @hits, renderer: BootstrapPagination::Sinatra %>
+			</div>
+			<div class="footer-rotation">
+	      <div class="homepage-footer">
+	        <ul class="index-footer">
+	          <li>
+	            <div class="homepage-footer-text">
+	              Piri Reis by
+	            </div>
+	          </li>
+	          <li>
+	            <img src="/images/doraklogo.png">
+	          </li>
+	        </ul>
+	      </div>
+	    </div>
+		</div>
+	</div>
+	<script>
+		var hits = <%= @hits %>
+		$(document).ready(function() {
+			var tds = $('.geo-results')
+			hits.forEach(function(hit, index) {
+				$.getJSON("http://ip-api.com/json/"+hit[0][3], function(data){
+					var table_body = "";
+					$.each(data, function(k, v) {
+						if(k == "country" ){
+							table_body +=   data['city']+','+data['country'];
+						}
 					});
-				})
-			});
-		</script>
-		<%= will_paginate @hits, renderer: BootstrapPagination::Sinatra %>
+					$(tds[index]).html(table_body);
+				});
+			})
+		});
+	</script>
 	</body>
-	</html>
+</html>
 	

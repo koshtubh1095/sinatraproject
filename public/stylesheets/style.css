@@ -1,0 +1,170 @@
+body, html {
+	height: 100%;
+	margin: 0;
+}
+.header{
+	height: 125px;
+	background: #0e285a;
+	padding: 7px 10px;
+	position: relative;
+}
+.logo-section{
+	float: left;
+}
+.logo{
+	display: inline-block;
+	vertical-align: top;
+	width: 350px !important;
+}
+.brand-name{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 10px;
+}
+
+.brand-name label{
+	display: block;
+	color: #fff;
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+.brand-name label span{
+	font-size: 14px;
+	font-style: italic;
+	margin-left: 5px;
+}
+.brand-name .logo-dorak{
+	width: 80px;
+}
+
+.profile-section{
+	float: right;
+	color: #fff;
+	padding: 10px;
+	padding-top: 40px;
+}
+.profile-section a{
+	color: #fff;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+/*.profile-section li{
+	display: inline-block;
+	margin:0 15px;
+	cursor: pointer;
+	margin-left: 0px;
+}*/
+.profile-section li {
+	float: left;
+	margin:0 15px;
+	cursor: pointer;
+	margin-left: 0px;
+
+}
+.mar-top-20 {
+	margin-top: 20px;
+}
+.profile-section li label{
+	margin-bottom: 0px;
+}
+.profile-pic{
+	width: 50px;
+    height: 67px;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.profile-pic img{
+	width: 100%;
+	cursor: initial;
+}
+.background-img{
+	background: url(/images/Piri-Reis.jpg);
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -273px;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+.background-overlay{
+	content: '';
+	position: absolute;
+	background-color: rgba(255, 255, 255, 0.7);
+	top:0;
+	left:0;
+	width: 100%;
+	bottom:0;
+	right: 0;
+}
+ul {
+	list-style-type: none;
+}
+.index-footer{
+	list-style-type: none;
+	display: -webkit-inline-box;
+	padding-right: 30px;
+}
+
+.homepage-footer-text{
+	padding-top: 35px;
+  padding-right: 9px;
+  font-size: 15px;
+  font-style: italic;
+}
+.index-footer img{
+	width: 80px;
+	height: 80px;
+}
+.index-footer li{
+	vertical-align: middle;
+}
+.homepage-footer{
+	right: 25px;
+  padding-bottom: 10px;
+  margin-left: 82%;
+}
+.footer-rotation{
+  right: 0;
+}
+.position-absolute {
+	position: absolute;
+}
+.position-relative {
+	position: relative;
+}
+.panel-default>.panel-heading{
+	background-color: rgba(0, 40, 117, 0.85);
+	color: #fff;
+}
+.table-style {
+	width: 100%;
+}
+.table-style thead,.hotel-tbl thead,.service-tbl thead{
+	background: #eee;
+}
+.table-style tr,.hotel-tbl tr,.service-tbl tr{
+	height: 15px;
+}
+.table-style thead th,
+.table-style tbody td{
+	text-align: center;
+	height: 20px;
+}
+.table-style thead th{
+	font-size: 14px;
+}
+.table-style tbody td{
+	font-size: 13px;
+	background: #fff;
+}
+.allpage-scroll {
+	background: url(/images/Piri-Reis.jpg) no-repeat center;
+  background-size: cover;
+}
+.panel-group {
+	margin-bottom: 0px !important;
+}
