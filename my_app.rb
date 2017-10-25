@@ -17,10 +17,10 @@ class MyApp < Sinatra::Base
     while (line = infile.gets)
       match = /(POST|DELETE|PUT|GET) (\S+) (for) (\S+) (at) (\S+)/.match(line)
       if match
-        hits[match[1..6]] += 1
+        hits[match[1..6]] += 1 if ['asset'].any? { |word| match[2].include?(word) } == false
       end
     end
-      get '/my_file.html' do
+    get '/my_file.html' do
       @page_title = 'Home'
       @page_id = 'my_file.html'
       page = params.fetch "page", 1
@@ -30,10 +30,10 @@ class MyApp < Sinatra::Base
       hits.each do |a|
         h << a
       end
-      hits.each do |d|
+      @hits = h.paginate(:page => page.to_i, :per_page => 50)
+      @hits.each do |d|
         @dates << {
                 date: d[0][5],
-                called_for: d[0][0],
                 total_hits: d[1]
               }
           end
@@ -44,12 +44,10 @@ class MyApp < Sinatra::Base
             sum = sum + val[:total_hits]
           end
           @arr << {
-            name: key.to_s,
-            data: sum.to_s
+            hits: sum.to_s,
+            date: key.to_s
           }
-          # binding.pry
         end
-      @hits = h.paginate(:page => page.to_i, :per_page => 15)
       erb :'my_file.html', locals: {hits: @hits, dates: @dates}
     end
   end

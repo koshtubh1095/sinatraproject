@@ -41,7 +41,9 @@
 	          </div>
 	          <div>
 	          	<div class="panel-body">
-								<%= bar_chart   @arr.map { |c| { name: c[:name], data: c[:data]  }}, discrete: true %>
+								<%= line_chart @arr.map { |ar|
+    								{data: @arr.map{|t| [t[:date], t[:hits]] }}
+										} , xtitle: "Duration", ytitle: "Hits", colors: ["green"] %>
 							</div>
 						</div>
 					</div>
